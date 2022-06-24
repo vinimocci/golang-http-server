@@ -1,17 +1,17 @@
 package app
 
 import (
-	"net/http"
 	"log"
-	"fmt"
+	"net/http"
+	"golang-http-server/app/modules"
 )
 
 func Routes(){
-	http.HandleFunc("/", homePage)
+	http.HandleFunc("/", modules.ReturnString)
 	log.Fatal(http.ListenAndServe(":8089", nil))
-
 }
 
-func homePage(w http.ResponseWriter, r *http.Request){	
-	fmt.Fprintf(w, "teste")	
- }
+/* 
+	Test this one below to return json in Fprintf
+	https://stackoverflow.com/questions/14567324/how-to-print-out-a-json-in-go 
+*/
