@@ -3,15 +3,14 @@ package app
 import (
 	"log"
 	"net/http"
+	"github.com/gorilla/mux"
 	"golang-http-server/app/modules"
 )
 
 func Routes(){
-	http.HandleFunc("/", modules.ReturnString)
-	log.Fatal(http.ListenAndServe(":8089", nil))
+	router := mux.NewRouter()
+	router.HandleFunc("/", modules.ReturnString)
+	router.HandleFunc("/myArray", modules.ReturnArray)
+	router.HandleFunc("/getDataById/{id}", modules.ReturnDatabyID)
+	log.Fatal(http.ListenAndServe(":8089", router))
 }
-
-/* 
-	Test this one below to return json in Fprintf
-	https://stackoverflow.com/questions/14567324/how-to-print-out-a-json-in-go 
-*/
